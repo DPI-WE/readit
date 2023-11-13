@@ -37,7 +37,7 @@ unless Rails.env.production?
 
     task add_posts: :environment do
       puts "adding posts"
-      25.times do |i|
+      50.times do |i|
         p = Post.create(
           user_id: User.all.sample.id,
           content: Faker::Quote.jack_handey

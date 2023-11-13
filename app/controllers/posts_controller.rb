@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     @breadcrumbs = [
       {content: "Posts", href: posts_path}
     ]
-    @q = Post.ransack(params[:q])
+    @q = Post.page(params[:page]).ransack(params[:q])
     @posts = @q.result.includes(:user)
   end
 
