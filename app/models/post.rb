@@ -24,4 +24,8 @@ class Post < ApplicationRecord
       "user"
     ]
   end
+
+  def to_s
+    "#{user.username}: #{content.truncate(25)}"
+  end
 end
