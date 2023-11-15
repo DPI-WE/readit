@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: %i[ new create edit update destroy ]
   before_action :set_post, only: %i[ show edit update destroy ]
+  before_action { authorize(@post || Post) }
 
   # GET /posts or /posts.json
   def index
-    @q = Post.page(params[:page]).ransack(params[:q])
+    @q = policy_scope(Post).page(params[:page]).ransack(params[:q])
     @posts = @q.result.includes(:user)
   end
 

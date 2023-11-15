@@ -4,6 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  content    :text
+#  flagged    :boolean          default(FALSE)
 #  link       :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

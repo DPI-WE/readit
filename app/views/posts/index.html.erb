@@ -26,7 +26,12 @@
       <%= link_to post, class: "list-group-item" do %>
         <div class="d-flex align-items-center">
           <div class="me-auto">
-            <h5 class="card-title"><%= post.user.username %></h5>
+            <h5 class="card-title">
+              <%= post.user.username %>
+              <% if post.flagged? %>
+                <i class="fa-solid fa-flag fa-shake text-danger"></i>
+              <% end %>
+            </h5>
             <p class="card-text"><%= post.content.truncate(150) %></p>
             <small class="text-secondary"><%= post.created_at.strftime("%m/%d/%Y %I:%M %p") %></small>
           </div>

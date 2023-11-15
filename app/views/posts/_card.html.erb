@@ -2,11 +2,15 @@
   <div class="card-header">
     <div class="d-flex align-items-center">
       <h5 class="card-title me-auto"><%= post.user.username %></h5>
-      <%= link_to edit_post_path(@post), class: "me-3" do %>
-        <i class="fa-solid fa-pen-to-square fa-xl"></i>
+      <% if policy(@post).edit? %>
+        <%= link_to edit_post_path(@post), class: "me-3" do %>
+          <i class="fa-solid fa-pen-to-square fa-xl"></i>
+        <% end %>
       <% end %>
-      <%= link_to @post, data: { "turbo-method": :delete, "turbo-confirm": "Are you sure? This is NOT reversible" }, class: "btn btn-outline-danger" do %>
-        <i class="fa-solid fa-trash"></i>
+      <% if policy(@post).destroy? %>
+        <%= link_to @post, data: { "turbo-method": :delete, "turbo-confirm": "Are you sure? This is NOT reversible" }, class: "btn btn-outline-danger" do %>
+          <i class="fa-solid fa-trash"></i>
+        <% end %>
       <% end %>
     </div>
 
