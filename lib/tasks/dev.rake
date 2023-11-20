@@ -40,7 +40,7 @@ unless Rails.env.production?
       25.times do |i|
         p = Post.create(
           user_id: User.all.sample.id,
-          content: Faker::TvShows::DumbAndDumber.quote
+          content: Faker::Quote.jack_handey
         )
       end
       puts "done"
