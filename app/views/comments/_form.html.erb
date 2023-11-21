@@ -13,12 +13,12 @@
 
   <%= form.hidden_field :post_id, value: comment.post.id %>
 
-  <div>
-    <%= form.label :content, style: "display: block" %>
-    <%= form.text_area :content %>
+  <div class="form-floating mb-3">
+    <%= form.text_area :content, class: "form-control" %>
+    <%= form.label :content %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="my-2">
+    <%= form.submit "Add comment", class: "btn btn-primary" %>
   </div>
 <% end %>

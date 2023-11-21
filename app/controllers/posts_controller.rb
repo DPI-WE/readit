@@ -1,12 +1,9 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, unless: %i[ index ]
+  before_action :authenticate_user!, only: %i[ new create edit update destroy ]
   before_action :set_post, only: %i[ show edit update destroy ]
 
   # GET /posts or /posts.json
   def index
-    @breadcrumbs = [
-      {content: "Posts", href: posts_path}
-    ]
     @q = Post.page(params[:page]).ransack(params[:q])
     @posts = @q.result.includes(:user)
   end

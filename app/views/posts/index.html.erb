@@ -1,48 +1,42 @@
-<div class="d-flex justify-content-between align-items-center">
-  <h1>Posts</h1>
-  <%= link_to new_post_path do %>
-    <i class="fa-solid fa-plus"></i>
-  <% end %>
-</div>
+<div class="card mb-2">
+  <div class="card-header">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1>Posts</h1>
+      <%= link_to "New Post", new_post_path, class: "btn btn-outline-primary" %>
+    </div>
+    <%= search_form_for @q, class: "my-3" do |f| %>
+      <div>
+        <%= f.label :content_cont, "Content containing", class: "form-label" %>
+        <%= f.text_field :content_cont, class: "form-control", placeholder: "Enter a few characters" %>
+      </div>
 
-<%= search_form_for @q, class: "my-3" do |f| %>
-  <div>
-    <%= f.label :content_cont, "Content containing", class: "form-label" %>
-    <%= f.text_field :content_cont, class: "form-control", placeholder: "Enter a few characters" %>
-  </div>
+      <div>
+        <%= f.label :user_username_eq, "Username containing", class: "form-label" %>
+        <%= f.text_field :user_username_eq, class: "form-control", placeholder: "Enter a few characters" %>
+      </div>
 
-  <div>
-    <%= f.label :user_username_eq, "Username containing", class: "form-label" %>
-    <%= f.text_field :user_username_eq, class: "form-control", placeholder: "Enter a few characters" %>
-  </div>
-
-  <div class="d-flex justify-content-between align-items-center my-3">
-    <%= f.submit class: "btn btn-primary btn-block" %>
-    <%= link_to "Clear", posts_path %>
-  </div>
-<% end %>
-
-<table id="posts" class="table table-responsive table-hover"">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">User</th>
-      <th scope="col"><%= sort_link(@q, :content, "Content") %></th>
-      <th scope="col"><%= sort_link(@q, :created_at, "Date") %></th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <th scope="row"><%= post.id %></th>
-        <td><%= post.user.username %></td>
-        <td><%= post.content.truncate(100) %></td>
-        <td><%= post.created_at.strftime("%m/%d/%Y %I:%M %p") %></td>
-        <td><%= link_to 'See more', post_path(post) %></td>
-      </tr>
+      <div class="d-flex justify-content-between align-items-center my-3">
+        <%= f.submit class: "btn btn-primary btn-block" %>
+        <%= link_to "Clear", posts_path %>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
+  <ul class="list-group list-group-flush">
+    <% @posts.each do |post| %>
+      <%= link_to post, class: "list-group-item" do %>
+        <div class="d-flex align-items-center">
+          <div class="me-auto">
+            <h5 class="card-title"><%= post.user.username %></h5>
+            <p class="card-text"><%= post.content.truncate(150) %></p>
+            <small class="text-secondary"><%= post.created_at.strftime("%m/%d/%Y %I:%M %p") %></small>
+          </div>
+          <div class="p-2">
+            <i class="fa-solid fa-chevron-right"></i>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
 
 <%= paginate @posts %>

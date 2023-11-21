@@ -1,0 +1,17 @@
+<div id="<%= dom_id post %>" class="card">
+  <div class="card-header">
+    <div class="d-flex align-items-center">
+      <h5 class="card-title me-auto"><%= post.user.username %></h5>
+      <%= link_to edit_post_path(@post), class: "me-3" do %>
+        <i class="fa-solid fa-pen-to-square fa-xl"></i>
+      <% end %>
+      <%= link_to @post, data: { "turbo-method": :delete, "turbo-confirm": "Are you sure? This is NOT reversible" }, class: "btn btn-outline-danger" do %>
+        <i class="fa-solid fa-trash"></i>
+      <% end %>
+    </div>
+
+  </div>
+  <div class="card-body">
+    <p class="card-text"><%= post.content %></p>
+  </div>
+</div>
