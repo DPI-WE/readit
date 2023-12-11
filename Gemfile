@@ -16,6 +16,7 @@ gem "htmlbeautifier"
 gem "http"
 gem "importmap-rails"
 gem "kaminari", "~> 1.2"
+gem 'meta-tags', '~> 2.1'
 gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 gem "pundit", "~> 2.3"
